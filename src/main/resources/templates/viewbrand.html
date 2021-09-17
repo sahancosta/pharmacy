@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <title>View Brands</title>
+</head>
+<body>
+<div class="container-fluid">
+    <h1>View Brands</h1>
+    <div th:switch="${brns}">
+        <h2 th:case="null"> Brand List Is Empty</h2>
+        <div th:case="*">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Brand Name</th>
+                    <th>Brand Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="brns : ${brns}">
+                    <td th:text="${brns.comp_name}"></td>
+                    <td th:text="${brns.comp_desc}"></td>
+                    <td > <a th:href="@{/showeditBrandForm/{id} (id=${brns.brand_id})}"> <i class="bi bi-pencil-square"> </i> </a> </td>
+                    <td > <a th:href="@{/deleteBrand/{id} (id=${brns.brand_id})}"> <i class="bi bi-trash-fill" style="color:#ff0000" onclick="if (!(confirm('Do You Wish TO Delete This Brand'))) return false"> </i> </a> </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+        <button class="btn btn-success" onclick="location.href='/showaddBrand'" type="button">Add New Employee</button>
+
+    </div>
+</div>
+
+
+</body>
+</html>

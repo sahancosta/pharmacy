@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <title>View Employees</title>
+</head>
+<body>
+<div class="container-fluid">
+    <h1>View Drugs</h1>
+    <div th:switch="${drs}">
+        <h2 th:case="null"> Drugs List Is Empty</h2>
+        <div th:case="*">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Drug Name</th>
+                    <th>Drug Type</th>
+                    <th>Drug Price</th>
+                    <th>Drug Capacity</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr th:each="drs : ${drs}">
+                    <td th:text="${drs.drug_name}"></td>
+                    <td th:text="${drs.drug_type}"></td>
+                    <td th:text="${drs.drug_price}"></td>
+                    <td th:text="${drs.drug_capacity}"></td>
+                    <td > <a th:href="@{/showeditDrugsForm/{id} (id=${drs.drug_id})}"> <i class="bi bi-pencil-square"> </i> </a> </td>
+                    <td > <a th:href="@{/deleteDrugs/{id} (id=${drs.drug_id})}"> <i class="bi bi-trash-fill" style="color:#ff0000" onclick="if (!(confirm('Do You Wish TO Delete This Employee'))) return false"> </i> </a> </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+        <button class="btn btn-success" onclick="location.href='/showaddDrugs'" type="button">Add New Drugs</button>
+
+    </div>
+</div>
+
+
+</body>
+</html>
